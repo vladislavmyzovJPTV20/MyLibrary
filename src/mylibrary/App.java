@@ -30,6 +30,8 @@ public class App {
 
     public App() {
         books = keeper.loadBooks();
+        readers = keeper.loadReaders();
+        histories = keeper.loadHistories();
     }
     
 
@@ -77,6 +79,7 @@ public class App {
                     for (int i = 0; i < readers.length; i++) {
                         if (readers[i] == null) {
                             readers[i] = addReader();
+                            keeper.saveReaders(readers);
                             break;
                         }
                     }
@@ -94,6 +97,7 @@ public class App {
                     for (int i = 0; i < histories.length; i++) {
                         if (histories[i] == null) {
                             histories[i] = addHistory();
+                            keeper.saveHistories(histories);
                             break;
                         }
                     }

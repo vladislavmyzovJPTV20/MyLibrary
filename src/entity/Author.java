@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package myclasses;
+package entity;
+
+import java.io.Serializable;
 
 /**
  *
  * @author pupil
  */
-public class Author {
+public class Author implements Serializable{
     private String firstname;
     private String lastname;
     private int birthYear;

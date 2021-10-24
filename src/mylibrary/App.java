@@ -81,33 +81,39 @@ public class App {
                     }
                     break;
                 case 5:
-                    System.out.println("----- Выдать книгу -----");
-                    histories.add(addHistory());
-                    keeper.saveHistories(histories);
-                    System.out.println("------------------------");
+                    System.out.println("---- Выдать книгу -----");
+                    History history = addHistory();
+                    if(history != null){
+                        histories.add(history);
+                        keeper.saveHistories(histories);
+                        keeper.saveBooks(books);
+                    }
+                    System.out.println("-----------------------");
                     break;
                 case 6:
                     System.out.println("----- Список выданных книг -----");
                     printGivenBooks();
                     break;
                 case 7:
-                    System.out.println("----- Возврат книги -----");
-                    System.out.println("Список выданных книг: ");
-                    printGivenBooks();
-                    System.out.println("Введите номер возвращаемой книги: ");
-                    int numberHistory = scanner.nextInt();
-                    scanner.nextLine();
+                    System.out.println("---- Возврат книги -----");
+                    System.out.println("Список выданных книг:");
+                    if(!printGivenBooks()){
+                        break;
+                    }
+                    System.out.print("Выберите номер возвращаемой книги: ");
+                    int numberHistory = scanner.nextInt(); scanner.nextLine();
                     Calendar c = new GregorianCalendar();
-                    if(histories.get(numberHistory - 1).getBook().getCount() < histories.get(numberHistory - 1).getBook().getQuantity()) {
+                    if(histories.get(numberHistory - 1).getBook().getCount()
+                            < histories.get(numberHistory - 1).getBook().getQuantity()){
                         histories.get(numberHistory - 1).setReturnedDate(c.getTime());
                         histories.get(numberHistory - 1).getBook().setCount(histories.get(numberHistory - 1).getBook().getCount()+1);
-                        
                     }else{
-                        System.out.println("Все экземпляыры книги в библиотеке");
+                        System.out.println("Все экземпляры книги в библиотеке");
                     }
                     
                     keeper.saveHistories(histories);
-                    System.out.printf("Книга \"%s\" возвращена%n", histories.get(numberHistory - 1).getBook().getBookName());
+                    keeper.saveBooks(books);
+                    System.out.printf("Книга \"%s\" возвращена%n", histories.get(numberHistory-1).getBook().getBookName());
                     break;
                 default:
                     System.out.println("Введите номер из списка!");
@@ -116,12 +122,12 @@ public class App {
         } while ("r".equals(repeat));
     }
 
-    private void printGivenBooks() {
+    private boolean printGivenBooks() {
         int n = 0;
         for (int i = 0; i < histories.size(); i++) {
             if (histories.get(i) != null && histories.get(i).getReturnedDate() == null && histories.get(i).getBook().getCount() < histories.get(i).getBook().getQuantity()) {
                 System.out.printf("%d. Книгу %s читает %s %s. Выдана книга: %s%n",
-                        i + 1,
+                        i,
                         histories.get(i).getBook().getBookName(),
                         histories.get(i).getReader().getFirstname(),
                         histories.get(i).getReader().getLastname(),
@@ -129,9 +135,11 @@ public class App {
                 n++;
             }
         }
-        if (n < 1) {
+        if(n < 1){
             System.out.println("Нет выданных книг");
+            return false;
         }
+        return true;
     }
 
     private Book addBook() {
@@ -179,6 +187,7 @@ public class App {
 
     private History addHistory() {
         History history = new History();
+        Book book = new Book();
         /**
          * 1. Вывести пронумерованный список книг библиотеки
          * 2. Попросить пользователя выбрать номер книги 
@@ -186,32 +195,37 @@ public class App {
          * 4. Попросить пользователя выбрать номер читателя
          * 5. Сгенерировать текущую дату выдачи 6. Инициировать объект History (задать состояние)
          */
-        System.out.println("Список книг");
+        
+        System.out.println("Список книг: ");
         for (int i = 0; i < books.size(); i++) {
-            if (books.get(i) != null) {
+            if (books.get(i) != null && books.get(i).getCount() > 0) {
                 System.out.println(i + 1 + ". " + books.get(i).toString());
-            }
-        }
-        System.out.print("Введите номер книги: ");
-        int numberBook = scanner.nextInt();
-        scanner.nextLine();
+                
+                System.out.print("Введите номер книги: ");
+                int numberBook = scanner.nextInt();
+                scanner.nextLine();
 
-        System.out.println("Список читателей");
-        for (int i = 0; i < readers.size(); i++) {
-            if (readers.get(i) != null) {
-                System.out.println(i + 1 + ". " + readers.get(i).toString());
+                System.out.println("Список читателей");
+                for (int j = 0; j < readers.size(); j++) {
+                    if (readers.get(j) != null) {
+                        System.out.println(j + 1 + ". " + readers.get(j).toString());
+                    }
+                }
+                System.out.print("Введите номер читателя: ");
+                int numberReader = scanner.nextInt();
+                scanner.nextLine();
+                history.setBook(books.get(numberBook - 1));
+                if(history.getBook().getCount() > 0){
+                    history.getBook().setCount(history.getBook().getCount() - 1);
+                }
+                history.setReader(readers.get(numberReader - 1));
+                Calendar c = new GregorianCalendar();
+                history.setGivenDate(c.getTime());
+            }else{
+                System.out.print("пуст");
+                break;
             }
         }
-        System.out.print("Введите номер читателя: ");
-        int numberReader = scanner.nextInt();
-        scanner.nextLine();
-        history.setBook(books.get(numberBook - 1));
-        if(history.getBook().getCount() > 0){
-            history.getBook().setCount(history.getBook().getCount() - 1);
-        }
-        history.setReader(readers.get(numberReader - 1));
-        Calendar c = new GregorianCalendar();
-        history.setGivenDate(c.getTime());
         return history;
     }
     

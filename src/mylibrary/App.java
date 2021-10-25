@@ -127,7 +127,7 @@ public class App {
         for (int i = 0; i < histories.size(); i++) {
             if (histories.get(i) != null && histories.get(i).getReturnedDate() == null && histories.get(i).getBook().getCount() < histories.get(i).getBook().getQuantity()) {
                 System.out.printf("%d. Книгу %s читает %s %s. Выдана книга: %s%n",
-                        i,
+                        i+1,
                         histories.get(i).getBook().getBookName(),
                         histories.get(i).getReader().getFirstname(),
                         histories.get(i).getReader().getLastname(),

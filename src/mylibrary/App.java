@@ -15,6 +15,8 @@ import entity.History;
 import entity.Reader;
 import interfaces.Keeping;
 import java.util.ArrayList;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import tools.SaverToFile;
 
@@ -35,7 +37,6 @@ public class App {
         readers = keeper.loadReaders();
         histories = keeper.loadHistories();
     }
-    
 
     public void run() {
         String repeat = "r";
@@ -132,6 +133,8 @@ public class App {
                         histories.get(i).getReader().getFirstname(),
                         histories.get(i).getReader().getLastname(),
                         histories.get(i).getGivenDate().toString());
+                        System.out.println("Предполагаемое время возврата книги: "+histories.get(i).getLocalReturnedDate().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")));
+                        
                 n++;
             }
         }
@@ -221,6 +224,9 @@ public class App {
                 history.setReader(readers.get(numberReader - 1));
                 Calendar c = new GregorianCalendar();
                 history.setGivenDate(c.getTime());
+                LocalDate localdate = LocalDate.now();
+                localdate = localdate.plusWeeks(2);
+                history.setLocalReturnedDate(localdate);
             }else{
                 System.out.print("пуст");
                 break;

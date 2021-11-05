@@ -20,6 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import tools.SaverToBase;
 import tools.SaverToFile;
 
 /**
@@ -32,7 +33,8 @@ public class App {
     private List<Book> books = new ArrayList<>();
     private List<Reader> readers = new ArrayList<>();
     private List<History> histories = new ArrayList<>();
-    private Keeping keeper = new SaverToFile();
+    //private Keeping keeper = new SaverToFile();
+    private Keeping keeper = new SaverToBase();
 
     public App() {
         books = keeper.loadBooks();

@@ -114,9 +114,9 @@ public class App {
         Calendar c = new GregorianCalendar();
         histories.get(historyNumber - 1).setReturnedDate(c.getTime());
         for (int i = 0; i < books.size(); i++) {
-            if(books.get(i).getBookName().equals(histories.get(historyNumber - 1).getBook().getBookName())){
-                books.get(i).setCount(books.get(i).getCount()+1);
-            }
+          if(books.get(i).getBookName().equals(histories.get(historyNumber-1).getBook().getBookName())){
+            books.get(i).setCount(books.get(i).getCount()+1);
+          }
         }
         keeper.saveBooks(books);
         keeper.saveHistories(histories);
@@ -223,8 +223,8 @@ public class App {
                 System.out.print("Введите номер читателя: ");
                 int numberReader = insertNumber(setNumbersReaders);
                 history.setBook(books.get(numberBook - 1));
-                if(history.getBook().getCount() > 0){
-                    history.getBook().setCount(history.getBook().getCount() - 1);
+                if(books.get(numberBook - 1).getCount() > 0){
+                    books.get(numberBook - 1).setCount(books.get(numberBook - 1).getCount() - 1);
                 }
                 history.setReader(readers.get(numberReader - 1));
                 Calendar c = new GregorianCalendar();
@@ -237,6 +237,9 @@ public class App {
                 break;
             }
         }
+        keeper.saveBooks(books);
+        histories.add(history);
+        keeper.saveHistories(histories);
     }
     
     private Set<Integer> printListBooks() {

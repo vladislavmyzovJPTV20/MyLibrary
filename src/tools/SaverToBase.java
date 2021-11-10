@@ -5,10 +5,12 @@
  */
 package tools;
 
+import entity.Author;
 import entity.Book;
 import entity.History;
 import entity.Reader;
 import interfaces.Keeping;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,15 +22,18 @@ import javax.persistence.Persistence;
  * @author pupil
  */
 public class SaverToBase implements Keeping{
+    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyLibraryPU");
+    private EntityManager em = emf.createEntityManager();
+    private EntityTransaction tx = em.getTransaction();
 
     @Override
     public void saveBooks(List<Book> books) {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyLibraryPU");
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction tx = em.getTransaction();
         tx.begin();
             for (int i = 0; i < books.size(); i++) {
                 if(books.get(i).getId() == null){
+                    for (int j = 0; j < books.get(i).getAuthor().size(); j++) {
+                        em.persist(books.get(i).getAuthor().get(j));
+                    }
                     em.persist(books.get(i));
                 }
             }
@@ -37,8 +42,38 @@ public class SaverToBase implements Keeping{
 
     @Override
     public List<Book> loadBooks() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List <Book> books = null;
+        try {
+            books = em.createQuery("SELECT book FROM Book book")
+                .getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+        return books;
     }
+    
+     @Override
+    public void saveAuthors(List<Author> authors) {
+        tx.begin();
+            for (int i = 0; i < authors.size(); i++) {
+                if(authors.get(i).getId() == null){
+                    em.persist(authors.get(i));
+                }
+            }
+        tx.commit();
+    }
+
+    @Override
+    public List<Author> loadAuthors() {
+        List <Author> authors = null;
+        try {
+            authors = em.createQuery("SELECT author FROM Author author")
+                .getResultList();
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+        return authors;
+        }
 
     @Override
     public void saveReaders(List<Reader> readers) {
@@ -59,5 +94,5 @@ public class SaverToBase implements Keeping{
     public List<History> loadHistories() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

@@ -7,12 +7,14 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.List;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -25,8 +27,8 @@ public class Book implements Serializable{
     private Long id;
     private String bookName;
     private int publishedYear;
-    @ElementCollection(fetch = FetchType.LAZY)
-    private Author[] author;
+    @OneToOne
+    private List<Author> author;
     private int quantity;
     private int count;
 
@@ -49,11 +51,11 @@ public class Book implements Serializable{
         this.publishedYear = publishedYear;
     }
 
-    public Author[] getAuthor() {
+    public List<Author> getAuthor() {
         return author;
     }
 
-    public void setAuthor(Author[] author) {
+    public void setAuthor(List<Author> author) {
         this.author = author;
     }
 
@@ -83,6 +85,10 @@ public class Book implements Serializable{
 
     @Override
     public String toString() {
-        return "Book{" + "id=" + id + ", bookName=" + bookName + ", publishedYear=" + publishedYear + ", author=" + author + ", quantity=" + quantity + ", count=" + count + '}';
+        return "Book{" + "id=" + id + ", bookName=" + bookName
+                + ", publishedYear=" + publishedYear
+                + ", author=" + author
+                + ", quantity=" + quantity
+                + ", count=" + count + '}';
     }
 }

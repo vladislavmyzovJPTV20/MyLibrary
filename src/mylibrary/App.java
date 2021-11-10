@@ -128,9 +128,9 @@ public class App {
         Calendar c = new GregorianCalendar();
         histories.get(historyNumber - 1).setReturnedDate(c.getTime());
         for (int i = 0; i < books.size(); i++) {
-          if(books.get(i).getBookName().equals(histories.get(historyNumber-1).getBook().getBookName())){
-            books.get(i).setCount(books.get(i).getCount()+1);
-          }
+            if(books.get(i).getBookName().equals(histories.get(historyNumber-1).getBook().getBookName())){
+                books.get(i).setCount(books.get(i).getCount()+1);
+            }
         }
         keeper.saveBooks(books);
         keeper.saveHistories(histories);

@@ -34,7 +34,7 @@ public class SaverToBase implements Keeping{
                     for (int j = 0; j < books.get(i).getAuthor().size(); j++) {
                         em.persist(books.get(i).getAuthor().get(j));
                     }
-                    em.persist(books.get(i));
+                    em.merge(books.get(i));
                 }
             }
         tx.commit();

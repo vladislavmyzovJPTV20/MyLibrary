@@ -16,14 +16,11 @@ import javax.persistence.Persistence;
  * @author pupil
  */
 public abstract class AbstractFacade<T> {
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("MyLibraryPU");
-    private EntityManager em = emf.createEntityManager();
-    private EntityTransaction tx = em.getTransaction();
     
     private Class<T> entityClass;
     
     public AbstractFacade(Class<T> entityClass) {
-        
+        this.entityClass = entityClass;
     }
     
     protected abstract EntityManager getEntityManager();

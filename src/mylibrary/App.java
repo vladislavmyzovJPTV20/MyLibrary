@@ -36,10 +36,10 @@ import tools.SaverToFile;
 public class App {
 
     private Scanner scanner = new Scanner(System.in);
-    private AuthorFacade authorFacade = new AuthorFacade();
-    private BookFacade bookFacade = new BookFacade();
-    private ReaderFacade readerFacade = new ReaderFacade();
-    private HistoryFacade historyFacade = new HistoryFacade();
+    private AuthorFacade authorFacade = new AuthorFacade(Author.class);
+    private BookFacade bookFacade = new BookFacade(Book.class);
+    private ReaderFacade readerFacade = new ReaderFacade(Reader.class);
+    private HistoryFacade historyFacade = new HistoryFacade(History.class);
 
     public App() {
     }
@@ -162,37 +162,29 @@ public class App {
 //      а следующий работает правильно.
         Book book = bookFacade.find(history.getBook().getId());
         book.setCount(book.getCount()+1);
-        bookFacade.create(book);
-        historyFacade.create(history);
+        bookFacade.edit(book);
+        historyFacade.edit(history);
     }
     
     private Set<Integer> printGivenBooks(){
         System.out.println("Список выданных книг: ");
         Set<Integer> setNumberGivenBooks = new HashSet<>();
-        List<History> historiesWithGivenBooks = historyFacade.findWithGivenBooks();
-        for (int i = 0; i < historiesWithGivenBooks.size(); i++) {
-            //если history не null и книга не возварщена и книг в наличии меньше
-            // чем записано в quantity -
-            // печатаем книгу
-            if(historiesWithGivenBooks.get(i) != null 
-                    && historiesWithGivenBooks.get(i).getReturnedDate() == null
-                    && historiesWithGivenBooks.get(i).getBook().getCount()
-                        <historiesWithGivenBooks.get(i).getBook().getQuantity()
-                    ){
-                System.out.printf("%d. Книгу: %s читает %s %s%n",
-                        historiesWithGivenBooks.get(i).getId(),
-                        historiesWithGivenBooks.get(i).getBook().getBookName(),
-                        historiesWithGivenBooks.get(i).getReader().getFirstname(),
-                        historiesWithGivenBooks.get(i).getReader().getLastname()
-                );
-                setNumberGivenBooks.add(historiesWithGivenBooks.get(i).getId().intValue());
-            }
+        List<History> historyesWithGivenBooks = historyFacade.findWithGivenBooks();
+        for (int i = 0; i < historyesWithGivenBooks.size(); i++) {
+            System.out.printf("%d. Книгу: %s читает %s %s%n",
+                    historyesWithGivenBooks.get(i).getId(),
+                    historyesWithGivenBooks.get(i).getBook().getBookName(),
+                    historyesWithGivenBooks.get(i).getReader().getFirstname(),
+                    historyesWithGivenBooks.get(i).getReader().getLastname()
+            );
+            setNumberGivenBooks.add(historyesWithGivenBooks.get(i).getId().intValue());
         }
         if(setNumberGivenBooks.isEmpty()){
             System.out.println("Выданных книг нет");
         }
         return setNumberGivenBooks;
     }
+    
     private void addBook(){
         Book book = new Book();
         Set<Integer> setNumbersAuthors = printListAuthors();

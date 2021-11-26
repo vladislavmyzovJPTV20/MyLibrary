@@ -7,21 +7,23 @@ package facade;
 
 import entity.Author;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import tools.Singleton;
 
 /**
  *
  * @author pupil
  */
 public class AuthorFacade extends AbstractFacade<Author>{
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPTV20MyLibraryPU");
-    private EntityManager em = emf.createEntityManager();
-    private EntityTransaction tx = em.getTransaction();
+    private EntityManager em;
 
     public AuthorFacade(Class<Author> entityClass) {
         super(entityClass);
+        init();
+    }
+    
+    private void init() {
+        Singleton singleton = Singleton.getInstance();
+        em = singleton.getEntityManager();
     }
 
     @Override

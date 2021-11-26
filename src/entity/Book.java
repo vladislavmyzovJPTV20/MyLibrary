@@ -8,6 +8,7 @@ package entity;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -91,4 +92,48 @@ public class Book implements Serializable{
                 + ", quantity=" + quantity
                 + ", count=" + count + '}';
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 53 * hash + Objects.hashCode(this.id);
+        hash = 53 * hash + Objects.hashCode(this.bookName);
+        hash = 53 * hash + this.publishedYear;
+        hash = 53 * hash + Objects.hashCode(this.author);
+        hash = 53 * hash + this.quantity;
+        hash = 53 * hash + this.count;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Book other = (Book) obj;
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.bookName, other.bookName)) {
+            return false;
+        }
+        if (this.publishedYear != other.publishedYear) {
+            return false;
+        }
+        if (!Objects.equals(this.author, other.author)) {
+            return false;
+        }
+        if (this.quantity != other.quantity) {
+            return false;
+        }
+        if (this.count != other.count) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }

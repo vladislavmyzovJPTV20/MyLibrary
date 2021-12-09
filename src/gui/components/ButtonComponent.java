@@ -1,0 +1,46 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gui.components;
+
+import java.awt.Dimension;
+import java.awt.Font;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+/**
+ *
+ * @author pupil
+ */
+public class ButtonComponent extends JPanel{
+    
+    private JLabel title;
+    private JButton button;
+    
+    public ButtonComponent(String text, int widthWindow,int heightPanel,int widthEditor) {
+        initComponents(text,widthWindow,heightPanel,widthEditor);
+    }
+
+    private void initComponents(String text,int widthWindow,int heightPanel, int widthEditor) {
+        this.setPreferredSize(new Dimension(widthWindow,heightPanel));
+        this.setMinimumSize(this.getPreferredSize());
+        this.setMaximumSize(this.getPreferredSize());
+        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+        title = new JLabel();
+        title.setPreferredSize(new Dimension(widthWindow/3,27));
+        title.setMinimumSize(getPreferredSize());
+        title.setMaximumSize(getPreferredSize());
+        title.setHorizontalAlignment(JLabel.RIGHT);
+        title.setFont(new Font("Tahoma",0,12));
+        this.add(title);
+        this.add(Box.createRigidArea(new Dimension(5,0)));
+        button 
+    }
+    
+}

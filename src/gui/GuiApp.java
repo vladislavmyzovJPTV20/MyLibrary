@@ -5,6 +5,7 @@
  */
 package gui;
 
+import gui.components.ButtonComponent;
 import gui.components.CaptionComponent;
 import gui.components.EditComponent;
 import gui.components.InfoComponent;
@@ -29,6 +30,7 @@ public class GuiApp extends JFrame{
     private ListAuthorsComponent listAuthorsComponent;
     private EditComponent publishedYearComponent;
     private EditComponent quantityComponent;
+    private ButtonComponent buttonComponent;
 
     public GuiApp() {
         initComponents();
@@ -47,14 +49,16 @@ public class GuiApp extends JFrame{
         infoComponent = new InfoComponent("Информация о добавлении книги в библиотеку", this.getWidth(), 27);
         this.add(infoComponent);
         this.add(Box.createRigidArea(new Dimension(0,10)));
-        editComponent = new EditComponent("Название книги", this.getWidth(), 30, 250);
+        editComponent = new EditComponent("Название книги", this.getWidth(), 30, 300);
         this.add(editComponent);
-        listAuthorsComponent = new ListAuthorsComponent("Авторы", this.getWidth(), 120, 250);
+        listAuthorsComponent = new ListAuthorsComponent("Авторы", this.getWidth(), 120, 300);
         this.add(listAuthorsComponent);
         publishedYearComponent = new EditComponent("Год издания книги", this.getWidth(), 30, 100);
         this.add(publishedYearComponent);
         quantityComponent = new EditComponent("Количество экземпляров книги", this.getWidth(), 30, 50);
         this.add(quantityComponent);
+        buttonComponent = new ButtonComponent("Добавить книгу", this.getWidth(), 30, 350, 150);
+        this.add(buttonComponent);
     }
     
     public static void main(String[] args) {

@@ -23,24 +23,28 @@ public class ButtonComponent extends JPanel{
     private JLabel title;
     private JButton button;
     
-    public ButtonComponent(String text, int widthWindow,int heightPanel,int widthEditor) {
-        initComponents(text,widthWindow,heightPanel,widthEditor);
+    public ButtonComponent(String text, int widthWindow,int heightPanel, int left, int widthEditor) {
+        initComponents(text,widthWindow,heightPanel,left,widthEditor);
     }
 
-    private void initComponents(String text,int widthWindow,int heightPanel, int widthEditor) {
+    private void initComponents(String text,int widthWindow,int heightPanel,int left, int widthEditor) {
         this.setPreferredSize(new Dimension(widthWindow,heightPanel));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         title = new JLabel();
-        title.setPreferredSize(new Dimension(widthWindow/3,27));
-        title.setMinimumSize(getPreferredSize());
-        title.setMaximumSize(getPreferredSize());
+        title.setPreferredSize(new Dimension(left,27));
+        title.setMinimumSize(title.getPreferredSize());
+        title.setMaximumSize(title.getPreferredSize());
         title.setHorizontalAlignment(JLabel.RIGHT);
         title.setFont(new Font("Tahoma",0,12));
         this.add(title);
         this.add(Box.createRigidArea(new Dimension(5,0)));
-        button 
+        button = new JButton(text);
+        button.setPreferredSize(new Dimension(widthEditor, 27));
+        button.setMinimumSize(button.getPreferredSize());
+        button.setMaximumSize(button.getPreferredSize());
+        this.add(button);
     }
     
 }

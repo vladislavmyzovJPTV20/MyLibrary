@@ -16,13 +16,13 @@ import javax.swing.JPanel;
  */
 public class CaptionComponent extends JPanel{
 
-    JLabel caption;
+    private JLabel caption;
     
     public CaptionComponent(String text, int widthWindow,int heightPanel) {
-        initComponents(widthWindow,heightPanel,text);
+        initComponents(text, widthWindow, heightPanel);
     }
 
-    private void initComponents(int widthWindow,int heightPanel,String text) {
+    private void initComponents(String text, int widthWindow,int heightPanel) {
         this.setPreferredSize(new Dimension(widthWindow,heightPanel));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());

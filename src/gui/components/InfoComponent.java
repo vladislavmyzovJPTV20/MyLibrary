@@ -16,7 +16,7 @@ import javax.swing.JPanel;
  */
 public class InfoComponent extends JPanel{
 
-    JLabel info;
+    private JLabel info;
     
     public InfoComponent(String text, int widthWindow,int heightPanel) {
         initComponents(text,widthWindow,heightPanel);

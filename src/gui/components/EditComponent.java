@@ -23,10 +23,10 @@ public class EditComponent extends JPanel{
     private JTextField editor;
     
     public EditComponent(String text, int widthWindow,int heightPanel,int widthEditor) {
-        initComponents(widthWindow,heightPanel,text,widthEditor);
+        initComponents(text, widthWindow, heightPanel, widthEditor);
     }
 
-    private void initComponents(int widthWindow,int heightPanel,String text, int widthEditor) {
+    private void initComponents(String text, int widthWindow,int heightPanel,int widthEditor) {
         this.setPreferredSize(new Dimension(widthWindow,heightPanel));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());

@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 
 /**
  *
@@ -30,15 +30,14 @@ public class TabAddBookComponent extends JPanel{
     private EditComponent quantityComponent;
     private ButtonComponent buttonComponent;
     private ListAuthorsComponent listAuthorsComponent;
-
-public TabAddBookComponent(int widthPanel) {
+    
+    public TabAddBookComponent(int widthPanel) {
         initComponents(widthPanel);
-    }
+    }    
 
-private void initComponents(int widthPanel) {
+    private void initComponents(int widthPanel) {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(Box.createRigidArea(new Dimension(0,25)));
-        
         captionComponent = new CaptionComponent("Добавление книги в библиотеку", widthPanel, 30);
         this.add(captionComponent);
         infoComponent = new InfoComponent("", widthPanel,30);
@@ -52,7 +51,7 @@ private void initComponents(int widthPanel) {
         this.add(publishedYearComponent);
         quantityComponent = new EditComponent("Количество экземпляров:", widthPanel, 30, 50);
         this.add(quantityComponent);
-        buttonComponent = new ButtonComponent("Добавить книгу", widthPanel, 30, 350, 150);
+        buttonComponent = new ButtonComponent("Добавить книгу",widthPanel, 30, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(new ActionListener() {
             @Override
@@ -102,6 +101,6 @@ private void initComponents(int widthPanel) {
                 }
                
             }
-        });
+        });        
     }
 }

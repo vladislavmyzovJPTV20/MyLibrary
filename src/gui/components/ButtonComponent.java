@@ -14,10 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author pupil
- */
 public class ButtonComponent extends JPanel{
     private JLabel title;
     private JButton button;
@@ -48,4 +44,4 @@ public class ButtonComponent extends JPanel{
     public JButton getButton() {
         return button;
     }
-}
+}    

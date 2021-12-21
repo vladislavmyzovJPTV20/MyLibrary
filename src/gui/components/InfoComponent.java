@@ -10,10 +10,7 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- *
- * @author pupil
- */
+
 public class InfoComponent extends JPanel{
     private JLabel info;
     public InfoComponent(String text, int widthWindow, int heightPanel) {
@@ -36,4 +33,5 @@ public class InfoComponent extends JPanel{
     public JLabel getInfo() {
         return info;
     }
+    
 }

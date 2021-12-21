@@ -42,7 +42,7 @@ public class TabAddAuthorComponent extends JPanel{
         this.add(surNameComponent);
         birthYearComponent = new EditComponent("Год рождения автора:", widthPanel, 30, 200);
         this.add(birthYearComponent);
-        buttonComponent = new ButtonComponent("Добавить автора", widthPanel, 30, 350, 150);
+        buttonComponent = new ButtonComponent("Добавить автора",widthPanel, 30, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(ButtonAddReader());
     }
@@ -76,14 +76,14 @@ public class TabAddAuthorComponent extends JPanel{
                 
                 try {
                     authorFacade.create(author);
-                    infoComponent.getInfo().setText("Автор успешно добавлен");
+                    infoComponent.getInfo().setText("Читатель успешно добавлен");
                     infoComponent.getInfo().setForeground(Color.BLUE);
                     birthYearComponent.getEditor().setText("");
                     surNameComponent.getEditor().setText("");
                     nameComponent.getEditor().setText("");
                 } catch (Exception e) {
                     infoComponent.getInfo().setForeground(Color.red);
-                    infoComponent.getInfo().setText("Автор добавить не удалось");
+                    infoComponent.getInfo().setText("Читателя добавить не удалось");
                 }
             }
         };

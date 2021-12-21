@@ -13,10 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-/**
- *
- * @author pupil
- */
+
 public class EditComponent extends JPanel{
     private JLabel title;
     private JTextField editor;

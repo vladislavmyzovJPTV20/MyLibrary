@@ -10,10 +10,6 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- *
- * @author pupil
- */
 public class CaptionComponent extends JPanel{
     private JLabel caption;
     public CaptionComponent(String text, int widthWindow, int heightPanel) {

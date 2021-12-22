@@ -5,11 +5,13 @@
  */
 package gui;
 
+import gui.components.ButtonComponent;
 import gui.components.ListBooksComponent;
 import gui.components.TabAddAuthorComponent;
 import gui.components.TabAddBookComponent;
 import gui.components.TabAddReaderComponent;
 import java.awt.Dimension;
+import javax.swing.Box;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -22,8 +24,11 @@ public class GuiApp extends JFrame{
     public static final int WIDTH_WINDOW = 700;
     public static final int HEIGHT_WINDOW = 450;
     private ListBooksComponent listBooksComponent;
+    private ButtonComponent buttonComponent;
+    private ButtonComponent buttonChangePanelComponent;
     
     public GuiApp() {
+        setTitle("Библиотека группы JPTV20");
         initComponents();
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -45,8 +50,12 @@ public class GuiApp extends JFrame{
         TabAddAuthorComponent tabAddAuthorComponent = new TabAddAuthorComponent(this.getWidth());
         managerTabbed.addTab("Добавить автора", tabAddAuthorComponent);
         JPanel guestPanel = new JPanel();
-        listBooksComponent = new ListBooksComponent(false, "Книги", GuiApp.HEIGHT_WINDOW, GuiApp.HEIGHT_WINDOW - 80, GuiApp.WIDTH_WINDOW);
+        listBooksComponent = new ListBooksComponent(false, "Список книг библиотеки", GuiApp.HEIGHT_WINDOW, GuiApp.HEIGHT_WINDOW - 80, GuiApp.WIDTH_WINDOW);
+        guestPanel.add(Box.createRigidArea(new Dimension(0,10)));
         guestPanel.add(listBooksComponent);
+        guestPanel.add(Box.createRigidArea(new Dimension(0,10)));
+        buttonChangePanelComponent = new ButtonComponent("К выбору книг", 30, 470, 200);
+        guestPanel.add(buttonChangePanelComponent);
         this.add(guestPanel);
         
     }

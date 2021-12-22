@@ -59,15 +59,21 @@ public class ListBooksComponent extends JPanel{
            title.setAlignmentY(TOP_ALIGNMENT);
        }else{
            this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+           this.add(Box.createRigidArea(new Dimension(0,10)));
            title.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW-50,27));
            title.setHorizontalAlignment(JLabel.CENTER);
            title.setAlignmentY(TOP_ALIGNMENT);
+           this.add(Box.createRigidArea(new Dimension(0,10)));
 
 
        }
        title.setFont(new Font("Tahoma",0,12));
        this.add(title);
-       this.add(Box.createRigidArea(new Dimension(5,0)));
+       if(xORy) {
+           this.add(Box.createRigidArea(new Dimension(5,0)));
+       }else{
+           this.add(Box.createRigidArea(new Dimension(0,10)));
+       }
        list.setModel(getListModel());
        list.setCellRenderer(new ListBooksCellRenderer());
        list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);

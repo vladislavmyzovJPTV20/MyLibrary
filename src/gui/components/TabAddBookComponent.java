@@ -51,7 +51,7 @@ public class TabAddBookComponent extends JPanel{
         this.add(publishedYearComponent);
         quantityComponent = new EditComponent("Количество экземпляров:", widthPanel, 30, 50);
         this.add(quantityComponent);
-        buttonComponent = new ButtonComponent("Добавить книгу",widthPanel, 30, 350, 150);
+        buttonComponent = new ButtonComponent("Добавить книгу", 30, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(new ActionListener() {
             @Override

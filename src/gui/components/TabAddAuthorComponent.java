@@ -76,14 +76,14 @@ public class TabAddAuthorComponent extends JPanel{
                 
                 try {
                     authorFacade.create(author);
-                    infoComponent.getInfo().setText("Читатель успешно добавлен");
+                    infoComponent.getInfo().setText("Автор успешно добавлен");
                     infoComponent.getInfo().setForeground(Color.BLUE);
                     birthYearComponent.getEditor().setText("");
                     surNameComponent.getEditor().setText("");
                     nameComponent.getEditor().setText("");
                 } catch (Exception e) {
                     infoComponent.getInfo().setForeground(Color.red);
-                    infoComponent.getInfo().setText("Читателя добавить не удалось");
+                    infoComponent.getInfo().setText("Автора добавить не удалось");
                 }
             }
         };

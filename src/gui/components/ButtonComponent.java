@@ -18,11 +18,14 @@ public class ButtonComponent extends JPanel{
     private JLabel title;
     private JButton button;
     public ButtonComponent(String text, int heightPanel, int left, int widthEditor) {
-        initComponents(text, heightPanel,left,widthEditor);
+        initComponents(text,GuiApp.WIDTH_WINDOW, heightPanel,left,widthEditor);
+    }
+    public ButtonComponent(String text, int widthPanel, int heightPanel, int left, int widthEditor) {
+        initComponents(text,widthPanel, heightPanel,left,widthEditor);
     }
 
-    private void initComponents(String text,int heightPanel,int left,int widthEditor) {
-       this.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,heightPanel));
+    private void initComponents(String text, int widthPanel, int heightPanel,int left,int widthEditor) {
+       this.setPreferredSize(new Dimension(widthPanel,heightPanel));
        this.setMinimumSize(this.getPreferredSize());
        this.setMaximumSize(this.getPreferredSize());
        this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));

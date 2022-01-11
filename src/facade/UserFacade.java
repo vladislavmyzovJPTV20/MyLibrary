@@ -5,24 +5,24 @@
  */
 package facade;
 
-import entity.Author;
 import entity.User;
 import javax.persistence.EntityManager;
 import tools.Singleton;
 
 /**
  *
- * @author pupil
+ * @author Melnikov
  */
 public class UserFacade extends AbstractFacade<User>{
+   
     private EntityManager em;
-
+    
     public UserFacade() {
         super(User.class);
         init();
     }
-    
-    private void init() {
+
+    private void init(){
         Singleton singleton = Singleton.getInstance();
         em = singleton.getEntityManager();
     }
@@ -30,6 +30,10 @@ public class UserFacade extends AbstractFacade<User>{
     @Override
     protected EntityManager getEntityManager() {
         return em;
+    }
+
+    public User find(String login) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

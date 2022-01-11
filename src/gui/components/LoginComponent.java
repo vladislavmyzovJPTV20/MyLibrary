@@ -18,6 +18,10 @@ import javax.swing.BoxLayout;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 
+/**
+ *
+ * @author Melnikov
+ */
 public class LoginComponent extends JFrame{
     private UserFacade userFacade;
     private UserRolesFacade userRolesFacade;
@@ -41,7 +45,7 @@ public class LoginComponent extends JFrame{
         dialogLogin.setMinimumSize(dialogLogin.getPreferredSize());
         dialogLogin.getContentPane().setLayout(new BoxLayout(dialogLogin.getContentPane(), BoxLayout.Y_AXIS));
         dialogLogin.setLocationRelativeTo(null);
-        CaptionComponent captionComponent = new CaptionComponent("Введите логин и пароль", 300, 27);
+        CaptionComponent captionComponent = new CaptionComponent("Введите логи и пароль", 300, 27);
         InfoComponent infoComponent = new InfoComponent("", 300, 27);
         EditComponent loginComponent = new EditComponent("Логин", 300, 27, 150);
         EditComponent passwordComponent = new EditComponent("Пароль", 300, 27, 150);

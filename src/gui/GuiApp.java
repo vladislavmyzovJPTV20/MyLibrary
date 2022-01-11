@@ -109,7 +109,7 @@ public class GuiApp extends JFrame{
         Reader reader = new Reader();
         reader.setFirstname("Vladislav");
         reader.setLastname("Myzov");
-        reader.setPhone("123454321");
+        reader.setPhone("23132132132");
         readerFacade.create(reader);
         
         User user = new User();

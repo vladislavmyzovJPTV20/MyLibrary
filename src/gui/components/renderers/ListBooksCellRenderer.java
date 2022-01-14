@@ -33,7 +33,7 @@ public class ListBooksCellRenderer extends DefaultListCellRenderer{
                       .append(". ");
                 }
                 label.setText(String.format("%d. %s. %s %d."
-                        ,book.getId()
+                        ,index+1
                         ,book.getBookName()
                         ,sb.toString()
                         ,book.getPublishedYear()

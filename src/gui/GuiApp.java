@@ -14,15 +14,18 @@ import facade.RoleFacade;
 import facade.UserFacade;
 import facade.UserRolesFacade;
 import gui.components.ButtonComponent;
+import gui.components.GuestComponent;
 import gui.components.ListBooksComponent;
 import gui.components.TabAddAuthorComponent;
 import gui.components.TabAddBookComponent;
 import gui.components.TabAddReaderComponent;
+import java.awt.Dialog;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.Box;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -53,44 +56,36 @@ public class GuiApp extends JFrame{
     }
     
     private void initComponents() {
-        this.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW));
+        this.setPreferredSize(new Dimension(WIDTH_WINDOW,HEIGHT_WINDOW));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());
-        JTabbedPane managerTabbed = new JTabbedPane();
-        managerTabbed.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW));
-        managerTabbed.setMinimumSize(managerTabbed.getPreferredSize());
-        managerTabbed.setMaximumSize(managerTabbed.getPreferredSize());
-        this.add(managerTabbed);
-        TabAddBookComponent tabAddBookComponent = new TabAddBookComponent(this.getWidth());
-        managerTabbed.addTab("Добавить книгу", tabAddBookComponent);
-        TabAddReaderComponent tabAddReaderComponent = new TabAddReaderComponent(this.getWidth());
-        managerTabbed.addTab("Добавить читателя", tabAddReaderComponent);
-        TabAddAuthorComponent tabAddAuthorComponent = new TabAddAuthorComponent(this.getWidth());
-        managerTabbed.addTab("Добавить автора", tabAddAuthorComponent);
-        JPanel guestPanel = new JPanel();
-        listBooksComponent = new ListBooksComponent(false, "Список книг библиотеки", GuiApp.HEIGHT_WINDOW, GuiApp.HEIGHT_WINDOW - 100, GuiApp.WIDTH_WINDOW);
-        guestPanel.add(Box.createRigidArea(new Dimension(0,10)));
-        guestPanel.add(listBooksComponent);
-        guestPanel.add(Box.createRigidArea(new Dimension(0,10)));
-        buttonChangePanelComponent = new ButtonComponent("К Выбору книг", 50, 470, 200);
+        JPanel guestPanel = new GuestComponent(WIDTH_WINDOW,HEIGHT_WINDOW);
+        
+        buttonChangePanelComponent = new ButtonComponent("К выбору книг", 50, 470, 200);
         guestPanel.add(buttonChangePanelComponent);
         this.add(guestPanel);
         buttonChangePanelComponent.getButton().addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
-            guiApp.getContentPane().removeAll();
-            JTabbedPane managerTabbed = new JTabbedPane();
-            managerTabbed.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW));
-            managerTabbed.setMinimumSize(managerTabbed.getPreferredSize());
-            managerTabbed.setMaximumSize(managerTabbed.getPreferredSize());
-            guiApp.add(managerTabbed);
-            TabAddBookComponent tabAddBookComponent = new TabAddBookComponent(guiApp.getWidth());
-            managerTabbed.addTab("Добавить книгу", tabAddBookComponent);
-            TabAddReaderComponent tabAddReaderComponent = new TabAddReaderComponent(guiApp.getWidth());
-            managerTabbed.addTab("Добавить читателя", tabAddReaderComponent);
-            TabAddAuthorComponent tabAddAuthorComponent = new TabAddAuthorComponent(guiApp.getWidth());
-            managerTabbed.addTab("Добавить автора", tabAddAuthorComponent);              
+                int widthWin = 350;
+                int heightWin = 260;
+                // Аутентификация
+                JDialog loginDialog = new JDialog(guiApp,"Введите логин и пароль", Dialog.ModalityType.DOCUMENT_MODAL);
+                
+                
+//              guiApp.getContentPane().removeAll();
+//              JTabbedPane managerTabbed = new JTabbedPane();
+//              managerTabbed.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW));
+//              managerTabbed.setMinimumSize(managerTabbed.getPreferredSize());
+//              managerTabbed.setMaximumSize(managerTabbed.getPreferredSize());
+//              guiApp.add(managerTabbed);
+//              TabAddBookComponent tabAddBookComponent = new TabAddBookComponent(guiApp.getWidth());
+//              managerTabbed.addTab("Добавить книгу", tabAddBookComponent);
+//              TabAddReaderComponent tabAddReaderComponent = new TabAddReaderComponent(guiApp.getWidth());
+//              managerTabbed.addTab("Добавить читателя", tabAddReaderComponent);
+//              TabAddAuthorComponent tabAddAuthorComponent = new TabAddAuthorComponent(guiApp.getWidth());
+//              managerTabbed.addTab("Добавить автора", tabAddAuthorComponent);              
             }
         });
     }

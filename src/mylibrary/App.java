@@ -33,7 +33,7 @@ import tools.SaverToFile;
  *
  * @author pupil
  */
-public class App {
+public class App{
 
     private Scanner scanner = new Scanner(System.in);
     private AuthorFacade authorFacade;

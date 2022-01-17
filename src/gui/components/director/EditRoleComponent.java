@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gui.components.reader;
+package gui.components.director;
 
+import gui.components.reader.*;
 import gui.components.*;
 import entity.Author;
 import entity.Book;
@@ -24,7 +25,7 @@ import javax.swing.JPanel;
  *
  * @author pupil
  */
-public class ReturnBookComponent extends JPanel{
+public class EditRoleComponent extends JPanel{
     private CaptionComponent captionComponent;
     private InfoComponent infoComponent;
     private EditComponent nameBookComponent;
@@ -33,9 +34,9 @@ public class ReturnBookComponent extends JPanel{
     private ButtonComponent buttonComponent;
     private ListAuthorsComponent listAuthorsComponent;
     
-    public ReturnBookComponent() {
+    public EditRoleComponent() {
         initComponents();
-    }    
+    }
 
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

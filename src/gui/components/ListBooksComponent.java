@@ -26,6 +26,7 @@ import javax.swing.ListSelectionModel;
 public class ListBooksComponent extends JPanel{
     private JLabel title;
     private JList<Book> list;
+    private JScrollPane scrollPane;
     /**
      * Список книг библиотеки с заголовком
      * @param xORy расположение компонентов на панели: true - горизонтальное, false - вертикальное
@@ -102,4 +103,9 @@ public class ListBooksComponent extends JPanel{
         return list;
     }
 
+    public JScrollPane getScrollPane() {
+        return scrollPane;
+    }
+
+    
 }

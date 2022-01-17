@@ -18,6 +18,8 @@ import gui.components.CaptionComponent;
 import gui.components.EditComponent;
 import gui.components.GuestComponent;
 import gui.components.InfoComponent;
+import gui.components.director.DirectorComponent;
+import gui.components.manager.ManagerComponent;
 import gui.components.reader.ReaderComponent;
 import java.awt.Dialog;
 import java.awt.Dimension;
@@ -39,6 +41,8 @@ public class GuiApp extends JFrame{
     private ButtonComponent buttonChangePanelComponent;
     private InfoComponent infoTopComponent;
     private ReaderComponent readerComponent;
+    private ManagerComponent managerComponent;
+    private DirectorComponent directorComponent;
     public GuiApp guiApp = this;
     public static User user;
     public static String role;
@@ -60,7 +64,9 @@ public class GuiApp extends JFrame{
         this.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());
-        guestPanel = new GuestComponent(WIDTH_WINDOW,HEIGHT_WINDOW);
+        infoTopComponent = new InfoComponent("", GuiApp.WIDTH_WINDOW, 27);
+        this.add(infoTopComponent);
+        guestPanel = new GuestComponent(330);
         buttonChangePanelComponent = new ButtonComponent("Войти", 50, 470, 200);
         guestPanel.add(buttonChangePanelComponent);
         this.add(guestPanel);
@@ -111,22 +117,43 @@ public class GuiApp extends JFrame{
                         //Пользователь тот за кого себя выдает, устанавливаем разрешения.
                         String role = userRolesFacade.getTopRole(user);
                         GuiApp.role = role;
-                        infoTopComponent.getInfo().setText("Hello "+user.getReader().getFirstname());
+                        
+                        // Удаляем гостевую панель и кнопку выйти
                         guiApp.getContentPane().remove(guestPanel);
                         guiApp.getContentPane().remove(buttonChangePanelComponent);
+                        
                         JTabbedPane jTabbedPane = new JTabbedPane();
                         jTabbedPane.setPreferredSize(new Dimension(WIDTH_WINDOW,HEIGHT_WINDOW));
                         jTabbedPane.setMinimumSize(jTabbedPane.getPreferredSize());
                         jTabbedPane.setMaximumSize(jTabbedPane.getPreferredSize());
-                        if("READER".equals(GuiApp.role)){
-                            readerComponent = new ReaderComponent(WIDTH_WINDOW,HEIGHT_WINDOW);
+                        if("ADMINISTRATOR".equals(GuiApp.role)){
+                            readerComponent = new ReaderComponent();
                             jTabbedPane.addTab("Читатель", readerComponent);
-                        }
+                            managerComponent = new ManagerComponent();
+                            jTabbedPane.addTab("Менеджер", managerComponent);
+                            directorComponent = new DirectorComponent();
+                            jTabbedPane.addTab("Директор", directorComponent);
+                        }else if("MANAHER".equals(GuiApp.role)){
+                            readerComponent = new ReaderComponent();
+                            jTabbedPane.addTab("Читатель", readerComponent);
+                            managerComponent = new ManagerComponent();
+                            jTabbedPane.addTab("Менеджер", managerComponent);
+                            directorComponent = new DirectorComponent();
+                            jTabbedPane.addTab("Директор", directorComponent);
+                        }else if("READER".equals(GuiApp.role)){
+                            readerComponent = new ReaderComponent();
+                            jTabbedPane.addTab("Читатель", readerComponent);
+                            managerComponent = new ManagerComponent();
+                            jTabbedPane.addTab("Менеджер", managerComponent);
+                            directorComponent = new DirectorComponent();
+                            jTabbedPane.addTab("Директор", directorComponent);
+                        
                         guiApp.getContentPane().add(jTabbedPane);
                         guiApp.repaint();
                         guiApp.revalidate();
                         dialogLogin.setVisible(false);
                         dialogLogin.dispose();
+                        }
                     }
                     
                 });

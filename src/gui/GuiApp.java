@@ -67,7 +67,7 @@ public class GuiApp extends JFrame{
         infoTopComponent = new InfoComponent("", GuiApp.WIDTH_WINDOW, 27);
         this.add(infoTopComponent);
         guestPanel = new GuestComponent(330);
-        buttonChangePanelComponent = new ButtonComponent("Войти", 50, 470, 200);
+        buttonChangePanelComponent = new ButtonComponent("Войти", GuiApp.WIDTH_WINDOW, 27, 470, 200);
         guestPanel.add(buttonChangePanelComponent);
         this.add(guestPanel);
         buttonChangePanelComponent.getButton().addActionListener(new ActionListener() {
@@ -75,16 +75,16 @@ public class GuiApp extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
               //Аутентификация
-                int widthWin = 350;
-                int heightWin = 260;
+                int widthLogin = 350;
+                int heightLogin = 260;
                 JDialog dialogLogin = new JDialog(guiApp,"Введите логин и пароль",Dialog.ModalityType.DOCUMENT_MODAL);
-                dialogLogin.setPreferredSize(new Dimension(widthWin,heightWin));
+                dialogLogin.setPreferredSize(new Dimension(widthLogin,heightLogin));
                 dialogLogin.setMaximumSize(dialogLogin.getPreferredSize());
                 dialogLogin.setMinimumSize(dialogLogin.getPreferredSize());
                 dialogLogin.getContentPane().setLayout(new BoxLayout(dialogLogin.getContentPane(), BoxLayout.Y_AXIS));
                 dialogLogin.setLocationRelativeTo(null);
-                CaptionComponent captionComponent = new CaptionComponent("Введите логин и пароль", widthWin, 27);
-                InfoComponent infoComponent = new InfoComponent("", widthWin, 27);
+                CaptionComponent captionComponent = new CaptionComponent("Введите логин и пароль", widthLogin, 27);
+                InfoComponent infoComponent = new InfoComponent("", widthLogin, 27);
                 EditComponent loginComponent = new EditComponent("Логин",200, 27, 120);
                 EditComponent passwordComponent = new EditComponent("Пароль", 200, 27, 120);
                 ButtonComponent enterComponent = new ButtonComponent("Войти", 27,180, 100);
@@ -117,8 +117,8 @@ public class GuiApp extends JFrame{
                         //Пользователь тот за кого себя выдает, устанавливаем разрешения.
                         String role = userRolesFacade.getTopRole(user);
                         GuiApp.role = role;
-                        
-                        // Удаляем гостевую панель и кнопку выйти
+                        infoTopComponent.getInfo().setText("Hello "+user.getReader().getFirstname());
+                        //Удаляем го
                         guiApp.getContentPane().remove(guestPanel);
                         guiApp.getContentPane().remove(buttonChangePanelComponent);
                         
@@ -130,30 +130,23 @@ public class GuiApp extends JFrame{
                             readerComponent = new ReaderComponent();
                             jTabbedPane.addTab("Читатель", readerComponent);
                             managerComponent = new ManagerComponent();
-                            jTabbedPane.addTab("Менеджер", managerComponent);
+                            jTabbedPane.addTab("Библиотекарь", managerComponent);
                             directorComponent = new DirectorComponent();
                             jTabbedPane.addTab("Директор", directorComponent);
-                        }else if("MANAHER".equals(GuiApp.role)){
+                        }else if("MANAGER".equals(GuiApp.role)){
                             readerComponent = new ReaderComponent();
                             jTabbedPane.addTab("Читатель", readerComponent);
                             managerComponent = new ManagerComponent();
-                            jTabbedPane.addTab("Менеджер", managerComponent);
-                            directorComponent = new DirectorComponent();
-                            jTabbedPane.addTab("Директор", directorComponent);
+                            jTabbedPane.addTab("Библиотекарь", managerComponent);                           
                         }else if("READER".equals(GuiApp.role)){
                             readerComponent = new ReaderComponent();
-                            jTabbedPane.addTab("Читатель", readerComponent);
-                            managerComponent = new ManagerComponent();
-                            jTabbedPane.addTab("Менеджер", managerComponent);
-                            directorComponent = new DirectorComponent();
-                            jTabbedPane.addTab("Директор", directorComponent);
-                        
+                            jTabbedPane.addTab("Читатель", readerComponent);                            
+                        }
                         guiApp.getContentPane().add(jTabbedPane);
                         guiApp.repaint();
                         guiApp.revalidate();
                         dialogLogin.setVisible(false);
                         dialogLogin.dispose();
-                        }
                     }
                     
                 });
@@ -189,7 +182,7 @@ public class GuiApp extends JFrame{
         Reader reader = new Reader();
         reader.setFirstname("Vladislav");
         reader.setLastname("Myzov");
-        reader.setPhone("23132132132");
+        reader.setPhone("123454321");
         readerFacade.create(reader);
         
         User user = new User();

@@ -35,13 +35,12 @@ public class DirectorComponent extends JPanel{
         readerTabbed.setMaximumSize(readerTabbed.getPreferredSize());
         this.add(readerTabbed);
         readerTabbed.addTab("Добавить читателя", new TabAddReaderComponent());
-        readerTabbed.addTab("Редактировать читателя", new EditReaderComponent());
-        readerTabbed.addTab("Изменить роль", new TabAddReaderComponent());
+        readerTabbed.addTab("Изменить читателя", new EditReaderComponent());
+        readerTabbed.addTab("Изменить роль", new EditRoleComponent()); 
     }
 
     public InfoComponent getInfoComponent() {
         return infoComponent;
     }
-    
     
 }

@@ -17,13 +17,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author pupil
- */
+
 public class ReturnBookComponent extends JPanel{
     private CaptionComponent captionComponent;
     private InfoComponent infoComponent;

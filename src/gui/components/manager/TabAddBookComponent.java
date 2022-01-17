@@ -21,10 +21,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author pupil
- */
 public class TabAddBookComponent extends JPanel{
     private CaptionComponent captionComponent;
     private InfoComponent infoComponent;
@@ -36,7 +32,7 @@ public class TabAddBookComponent extends JPanel{
     
     public TabAddBookComponent() {
         initComponents();
-    }
+    }    
 
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

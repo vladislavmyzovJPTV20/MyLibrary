@@ -18,13 +18,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author pupil
- */
+
 public class EditReaderComponent extends JPanel{
     private CaptionComponent captionComponent;
     private InfoComponent infoComponent;
@@ -36,7 +32,7 @@ public class EditReaderComponent extends JPanel{
     
     public EditReaderComponent() {
         initComponents();
-    }
+    }    
 
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

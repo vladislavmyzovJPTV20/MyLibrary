@@ -16,7 +16,7 @@ public class GuestComponent extends JPanel{
     public GuestComponent() {
         initComponents(GuiApp.HEIGHT_WINDOW);
     }
-    
+
     public GuestComponent(int heightList) {
         initComponents(heightList);
     }
@@ -25,9 +25,10 @@ public class GuestComponent extends JPanel{
        this.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW));
        this.setMinimumSize(this.getPreferredSize());
        this.setMaximumSize(this.getPreferredSize());
-       listBooksComponent = new ListBooksComponent(false, "Список книг библиотеки", 0, heightList, GuiApp.WIDTH_WINDOW);
-       this.add(Box.createRigidArea(new Dimension(0,5)));
+       listBooksComponent = new ListBooksComponent(false, "Список книг библиотеки",0, heightList, GuiApp.WIDTH_WINDOW);
+       this.add(Box.createRigidArea(new Dimension(0,10)));
        this.add(listBooksComponent);
+       this.add(Box.createRigidArea(new Dimension(0,10)));
     }
 
     public ListBooksComponent getListBooksComponent() {
@@ -37,6 +38,5 @@ public class GuestComponent extends JPanel{
     public void setListBooksComponent(ListBooksComponent listBooksComponent) {
         this.listBooksComponent = listBooksComponent;
     }
-    
     
 }

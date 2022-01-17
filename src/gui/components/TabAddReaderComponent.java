@@ -7,6 +7,7 @@ package gui.components;
 
 import entity.Reader;
 import facade.ReaderFacade;
+import gui.GuiApp;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -45,7 +46,7 @@ public class TabAddReaderComponent extends JPanel{
         this.add(lastNameComponent);
         phoneComponent = new EditComponent("Телефон:", widthPanel, 30, 200);
         this.add(phoneComponent);
-        buttonComponent = new ButtonComponent("Добавить читателя", 30, 350, 150);
+        buttonComponent = new ButtonComponent("Добавить читателя",GuiApp.WIDTH_WINDOW, 30, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(ButtonAddReader());
     }

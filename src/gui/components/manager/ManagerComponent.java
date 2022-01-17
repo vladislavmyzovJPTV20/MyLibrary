@@ -37,12 +37,11 @@ public class ManagerComponent extends JPanel{
         readerTabbed.addTab("Добавить книгу", new TabAddBookComponent());
         readerTabbed.addTab("Редактировать книгу", new EditBookComponent());
         readerTabbed.addTab("Добавить автора", new TabAddAuthorComponent());
-        readerTabbed.addTab("Редактировать автора", new EditAuthorComponent());
+        readerTabbed.addTab("Редактировать автора", new EditAuthorComponent());      
     }
 
     public InfoComponent getInfoComponent() {
         return infoComponent;
     }
-    
     
 }

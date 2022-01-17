@@ -3,6 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+
+/**
+ *
+ * @author pupil
+ */
 package gui.components.reader;
 
 import gui.components.*;
@@ -20,10 +26,6 @@ import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author pupil
- */
 public class TakeBookComponent extends JPanel{
     private CaptionComponent captionComponent;
     private InfoComponent infoComponent;
@@ -32,12 +34,11 @@ public class TakeBookComponent extends JPanel{
     private EditComponent quantityComponent;
     private ButtonComponent buttonComponent;
     private ListAuthorsComponent listAuthorsComponent;
-    private ListBooksComponent listBooksComponent;
     private GuestComponent guestComponent;
     
     public TakeBookComponent() {
         initComponents();
-    }
+    }    
 
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -46,15 +47,14 @@ public class TakeBookComponent extends JPanel{
         this.add(captionComponent);
         infoComponent = new InfoComponent("", GuiApp.WIDTH_WINDOW,30);
         this.add(infoComponent);
-        this.add(Box.createRigidArea(new Dimension(0,10)));
+        this.add(Box.createRigidArea(new Dimension(0,5)));
         this.setPreferredSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());
         guestComponent = new GuestComponent(200);
-        guestComponent.getListBooksComponent().getScrollPane().setSize(new Dimension(GuiApp.WIDTH_WINDOW,GuiApp.HEIGHT_WINDOW-400));
         this.add(guestComponent);
-        this.add(Box.createRigidArea(new Dimension(0,10)));
-        buttonComponent = new ButtonComponent("Взять книги для чтения", 27, 20, 200);
+        this.add(Box.createRigidArea(new Dimension(0,5)));        
+        buttonComponent = new ButtonComponent("Взять книгу для чтения", GuiApp.WIDTH_WINDOW, 20, 200, 200);
         this.add(buttonComponent);
     }
 }

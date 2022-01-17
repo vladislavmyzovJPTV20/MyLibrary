@@ -8,6 +8,7 @@ package gui.components;
 import entity.Author;
 import entity.Book;
 import facade.BookFacade;
+import gui.GuiApp;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -51,7 +52,7 @@ public class TabAddBookComponent extends JPanel{
         this.add(publishedYearComponent);
         quantityComponent = new EditComponent("Количество экземпляров:", widthPanel, 30, 50);
         this.add(quantityComponent);
-        buttonComponent = new ButtonComponent("Добавить книгу", 30, 350, 150);
+        buttonComponent = new ButtonComponent("Добавить книгу",GuiApp.WIDTH_WINDOW, 30, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(new ActionListener() {
             @Override

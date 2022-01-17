@@ -7,6 +7,7 @@ package gui.components;
 
 import entity.Author;
 import facade.AuthorFacade;
+import gui.GuiApp;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -42,7 +43,7 @@ public class TabAddAuthorComponent extends JPanel{
         this.add(surNameComponent);
         birthYearComponent = new EditComponent("Год рождения автора:", widthPanel, 30, 200);
         this.add(birthYearComponent);
-        buttonComponent = new ButtonComponent("Добавить автора", 30, 350, 150);
+        buttonComponent = new ButtonComponent("Добавить автора",GuiApp.WIDTH_WINDOW, 30, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(ButtonAddReader());
     }

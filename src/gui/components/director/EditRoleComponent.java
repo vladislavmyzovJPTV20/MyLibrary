@@ -18,13 +18,9 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-/**
- *
- * @author pupil
- */
+
 public class EditRoleComponent extends JPanel{
     private CaptionComponent captionComponent;
     private InfoComponent infoComponent;
@@ -36,7 +32,7 @@ public class EditRoleComponent extends JPanel{
     
     public EditRoleComponent() {
         initComponents();
-    }
+    }    
 
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

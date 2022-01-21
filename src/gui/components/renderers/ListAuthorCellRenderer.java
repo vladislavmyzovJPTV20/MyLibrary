@@ -28,8 +28,7 @@ public class ListAuthorCellRenderer extends DefaultListCellRenderer{
             if(component instanceof JLabel){
                 JLabel label = (JLabel) component;
                 Author author = (Author) value;
-                label.setText(String.format("%d. %s %s. %d"
-                        ,index+1
+                label.setText(String.format("%s %s. %d"
                         ,author.getFirstname()
                         ,author.getLastname()
                         ,author.getBirthYear()

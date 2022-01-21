@@ -12,6 +12,7 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.ListCellRenderer;
 import javax.swing.UIManager;
 
 public class ListBooksCellRenderer extends DefaultListCellRenderer{
@@ -25,6 +26,7 @@ public class ListBooksCellRenderer extends DefaultListCellRenderer{
             if(component instanceof JLabel){
                 JLabel label = (JLabel) component;
                 Book book = (Book) value;
+                if(book == null) return component;
                 StringBuilder sb = new StringBuilder();
                 for (Author author : book.getAuthor()) {
                     sb.append(author.getFirstname())

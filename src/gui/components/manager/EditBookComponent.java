@@ -15,10 +15,14 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
+import javax.swing.ListModel;
+import javax.swing.plaf.basic.BasicComboBoxUI;
 
 
 public class EditBookComponent extends JPanel{
@@ -29,18 +33,26 @@ public class EditBookComponent extends JPanel{
     private EditComponent quantityComponent;
     private ButtonComponent buttonComponent;
     private ListAuthorsComponent listAuthorsComponent;
+    private ComboBoxBooksComponent comboBoxBooksComponent;
+    
+    private BookFacade bookfacade;
+    private Book book;
     
     public EditBookComponent() {
+        bookFacade = new BookFacade(Book.class);
         initComponents();
     }    
 
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(Box.createRigidArea(new Dimension(0,25)));
-        captionComponent = new CaptionComponent("Добавление книги в библиотеку", GuiApp.WIDTH_WINDOW, 30);
+        captionComponent = new CaptionComponent("Редактирование книги", GuiApp.WIDTH_WINDOW, 30);
         this.add(captionComponent);
         infoComponent = new InfoComponent("", GuiApp.WIDTH_WINDOW,30);
         this.add(infoComponent);
+        this.add(Box.createRigidArea(new Dimension(0,10)));
+        comboBoxBooksComponent = new ComboBoxBooksComponent("Книги", 240, 30, 300);
+        this.add(comboBoxBooksComponent);
         this.add(Box.createRigidArea(new Dimension(0,10)));
         nameBookComponent = new EditComponent("Название книги:",GuiApp.WIDTH_WINDOW, 30, 300);
         this.add(nameBookComponent);
@@ -91,6 +103,7 @@ public class EditBookComponent extends JPanel{
                     infoComponent.getInfo().setForeground(Color.BLUE);
                     infoComponent.getInfo().setText("Книга успешно добавлена");
                     nameBookComponent.getEditor().setText("");
+                    nameBookComponent.repaint();
                     publishedYearComponent.getEditor().setText("");
                     quantityComponent.getEditor().setText("");
                     listAuthorsComponent.getList().clearSelection();
@@ -101,5 +114,22 @@ public class EditBookComponent extends JPanel{
                
             }
         });        
+        comboBoxBooksComponent.getComboBox().addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                Book book = (Book) e.getItem();
+                nameBookComponent.getEditor().setText(book.getBookName());
+                publishedYearComponent.getEditor().setText(((Integer)book.getPublishedYear()).toString());
+                quantityComponent.getEditor().setText(((Integer)book.getQuantity()).toString());
+                listAuthorsComponent.getList().clearSelection();
+                ListModel<Author> listModel = listAuthorsComponent.getList().getModel();
+                for (int i = 0; i < listModel.getSize();i++) {
+                    if(book.getAuthor().contains(listModel.getElementAt(i))){
+                        listAuthorsComponent.getList().getSelectionModel().addSelectionInterval(i, i);
+                    }
+                }
+            }
+        });
     }
 }

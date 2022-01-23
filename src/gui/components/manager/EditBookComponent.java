@@ -20,12 +20,14 @@ import java.awt.event.ItemListener;
 import java.util.List;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.ListModel;
 import javax.swing.plaf.basic.BasicComboBoxUI;
 
 
 public class EditBookComponent extends JPanel{
+    public EditBookComponent editBookComponent = this;
     private CaptionComponent captionComponent;
     private InfoComponent infoComponent;
     private EditComponent nameBookComponent;
@@ -35,13 +37,12 @@ public class EditBookComponent extends JPanel{
     private ListAuthorsComponent listAuthorsComponent;
     private ComboBoxBooksComponent comboBoxBooksComponent;
     
-    private BookFacade bookfacade;
-    private Book book;
-    
+    private BookFacade bookFacade;
+    private Book editBook;
     public EditBookComponent() {
         bookFacade = new BookFacade(Book.class);
         initComponents();
-    }    
+    }  
 
     private void initComponents() {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -62,18 +63,19 @@ public class EditBookComponent extends JPanel{
         this.add(publishedYearComponent);
         quantityComponent = new EditComponent("Количество экземпляров:", GuiApp.WIDTH_WINDOW, 30, 50);
         this.add(quantityComponent);
-        buttonComponent = new ButtonComponent("Добавить книгу", 30, 350, 150);
+        buttonComponent = new ButtonComponent("Изменить книгу", 30, 350, 150);
         this.add(buttonComponent);
         buttonComponent.getButton().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Book book = new Book();
+                Book updateBook = bookFacade.find(editBook.getId());
+                
                 if(nameBookComponent.getEditor().getText().isEmpty()){
                     infoComponent.getInfo().setForeground(Color.red);
                     infoComponent.getInfo().setText("Введите название книги");
                     return;
                 }
-                book.setBookName(nameBookComponent.getEditor().getText());
+                updateBook.setBookName(nameBookComponent.getEditor().getText());
                 
                 List<Author> authorsBook = listAuthorsComponent.getList().getSelectedValuesList();
                 if(authorsBook.isEmpty()){
@@ -81,17 +83,17 @@ public class EditBookComponent extends JPanel{
                     infoComponent.getInfo().setText("Выберите авторов книги");
                     return;
                 }
-                book.setAuthor(authorsBook);
+                updateBook.setAuthor(authorsBook);
                 try {
-                    book.setPublishedYear(Integer.parseInt(publishedYearComponent.getEditor().getText()));
+                    updateBook.setPublishedYear(Integer.parseInt(publishedYearComponent.getEditor().getText()));
                 } catch (Exception ex) {
                     infoComponent.getInfo().setForeground(Color.red);
                     infoComponent.getInfo().setText("Введите год издания книги (цифрами)");
                     return;
                 }
                 try {
-                    book.setQuantity(Integer.parseInt(quantityComponent.getEditor().getText()));
-                    book.setCount(book.getQuantity());
+                    updateBook.setQuantity(Integer.parseInt(quantityComponent.getEditor().getText()));
+                    updateBook.setCount(updateBook.getQuantity());
                 } catch (Exception ex) {
                     infoComponent.getInfo().setForeground(Color.red);
                     infoComponent.getInfo().setText("Введите количество книг (цифрами)");
@@ -99,33 +101,35 @@ public class EditBookComponent extends JPanel{
                 }
                 BookFacade bookFacade = new BookFacade(Book.class);
                 try {
-                    bookFacade.create(book);
+                    bookFacade.edit(updateBook);
                     infoComponent.getInfo().setForeground(Color.BLUE);
-                    infoComponent.getInfo().setText("Книга успешно добавлена");
-                    nameBookComponent.getEditor().setText("");
-                    nameBookComponent.repaint();
-                    publishedYearComponent.getEditor().setText("");
-                    quantityComponent.getEditor().setText("");
-                    listAuthorsComponent.getList().clearSelection();
+                    infoComponent.getInfo().setText("Книга успешно изменена");
+                    comboBoxBooksComponent.getComboBox().setModel(comboBoxBooksComponent.getComboBoxModel());
+                    comboBoxBooksComponent.getComboBox().setSelectedIndex(-1);
                 } catch (Exception ex) {
                     infoComponent.getInfo().setForeground(Color.RED);
-                    infoComponent.getInfo().setText("Книгу добавить не удалось");
+                    infoComponent.getInfo().setText("Книгу изменить не удалось");
                 }
                
             }
         });        
-        comboBoxBooksComponent.getComboBox().addItemListener(new ItemListener() {
+        comboBoxBooksComponent.getComboBox().addItemListener((ItemEvent e) -> {
 
-            @Override
-            public void itemStateChanged(ItemEvent e) {
-                Book book = (Book) e.getItem();
-                nameBookComponent.getEditor().setText(book.getBookName());
-                publishedYearComponent.getEditor().setText(((Integer)book.getPublishedYear()).toString());
-                quantityComponent.getEditor().setText(((Integer)book.getQuantity()).toString());
+            JComboBox comboBox = (JComboBox) e.getSource();
+            if(comboBox.getSelectedIndex() == -1) {
+                nameBookComponent.getEditor().setText("");
+                publishedYearComponent.getEditor().setText("");
+                quantityComponent.getEditor().setText("");
+                listAuthorsComponent.getList().clearSelection();
+            }else{
+                editBook = (Book) e.getItem();
+                nameBookComponent.getEditor().setText(editBook.getBookName());
+                publishedYearComponent.getEditor().setText(((Integer)editBook.getPublishedYear()).toString());
+                quantityComponent.getEditor().setText(((Integer)editBook.getQuantity()).toString());
                 listAuthorsComponent.getList().clearSelection();
                 ListModel<Author> listModel = listAuthorsComponent.getList().getModel();
                 for (int i = 0; i < listModel.getSize();i++) {
-                    if(book.getAuthor().contains(listModel.getElementAt(i))){
+                    if(editBook.getAuthor().contains(listModel.getElementAt(i))){
                         listAuthorsComponent.getList().getSelectionModel().addSelectionInterval(i, i);
                     }
                 }

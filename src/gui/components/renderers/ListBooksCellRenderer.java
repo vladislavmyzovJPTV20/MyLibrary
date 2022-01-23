@@ -34,8 +34,7 @@ public class ListBooksCellRenderer extends DefaultListCellRenderer{
                       .append(author.getLastname())
                       .append(". ");
                 }
-                label.setText(String.format("%d. %s. %s %d."
-                        ,index+1
+                label.setText(String.format("%s. %s %d."
                         ,book.getBookName()
                         ,sb.toString()
                         ,book.getPublishedYear()

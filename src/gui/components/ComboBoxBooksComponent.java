@@ -33,7 +33,6 @@ public class ComboBoxBooksComponent extends JPanel{
     private JComboBox<Book> comboBox;
     /**
      * Список книг библиотеки с заголовком
-     * @param xORy расположение компонентов на панели: true - горизонтальное, false - вертикальное
      * @param text текст в JLabel
      * @param left ширина JLabel
      * @param heightPanel высота панели компонента
@@ -70,7 +69,7 @@ public class ComboBoxBooksComponent extends JPanel{
        this.add(comboBox);
     }
 
-    private ComboBoxModel<Book> getComboBoxModel() {
+    public ComboBoxModel<Book> getComboBoxModel() {
         BookFacade bookFacade = new BookFacade(Book.class);
         List<Book> books = bookFacade.findAll();
 
